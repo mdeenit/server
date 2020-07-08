@@ -6,7 +6,13 @@ const getAllBookings = (req) => {
 	return dummyBookings;
 };
 
-const getBookingById = (req) => {};
+const getBookingById = (req) => {
+	let booking = dummyBookings[req.params.id];
+	if (booking) {
+		return booking;
+	}
+	req.error = 'No booking found';
+};
 
 function loadData(file) {
 	dummyBookings = JSON.parse(fs.readFileSync(file, 'utf8'));

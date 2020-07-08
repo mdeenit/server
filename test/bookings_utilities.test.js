@@ -1,7 +1,11 @@
 const expect = require('expect');
 const dummyDataFile = './data/dummy_bookings.test.json';
 const fs = require('fs');
-const { loadData, getAllBookings } = require('../utils/bookings_utilities');
+const {
+	loadData,
+	getAllBookings,
+	getBookingById,
+} = require('../utils/bookings_utilities');
 
 beforeEach(() => {
 	setupData();
@@ -21,6 +25,23 @@ describe('getAllBookings', () => {
 		let bookings = getAllBookings({});
 		expect(Object.keys(bookings).length).toBe(1);
 		expect(bookings['1'].child_name).toBe('test data child name');
+	});
+});
+
+describe('getBookingById', () => {
+	let req = {
+		params: {
+			id: '1',
+		},
+	};
+	it('should return the correct booking based on id', () => {
+		let booking = getBookingById(req);
+		expect(booking.username).toBe('test data username');
+	});
+	it('should set req.error when given an invalid id', () => {
+		req.params.id = '2';
+		let booking = getBookingById(req);
+		expect(req.error).toBe('No booking found');
 	});
 });
 
