@@ -13,7 +13,7 @@ const getBookings = (req, res) => {
 		})
 		.exec((error, bookings) => {
 			if (error) {
-				res.status = 500;
+				res.status(500);
 				return res.json({
 					error: error.message,
 				});
@@ -23,13 +23,13 @@ const getBookings = (req, res) => {
 };
 
 const getBooking = (req, res) => {
-	let booking = getBookingById(req);
-	if (booking) {
+	getBookingById(req).exec((error, booking) => {
+		if (error) {
+			res.status(404);
+			return res.send('Booking not found');
+		}
 		res.send(booking);
-	} else {
-		res.status(400);
-		res.send(req.error);
-	}
+	});
 };
 
 const makeBooking = (req, res) => {

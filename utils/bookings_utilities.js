@@ -9,11 +9,7 @@ const getAllBookings = (req) => {
 };
 
 const getBookingById = (req) => {
-	let booking = dummyBookings[req.params.id];
-	if (booking) {
-		return booking;
-	}
-	req.error = 'No booking found';
+	return Booking.findById(req.params.id);
 };
 
 const addBooking = (req) => {

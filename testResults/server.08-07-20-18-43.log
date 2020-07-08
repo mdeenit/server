@@ -10,7 +10,7 @@ START----------------------
 
 END----------------------
 
-Note: Missing clearData function.
+Note: Missing clearData function. Need to add for tets to run.
 
 08-07-20-18-43
 START----------------------
@@ -20,7 +20,7 @@ START----------------------
 
 
 
-Connected to Tooth Inc. database
+Connected to Tooth Inc. TEST database
   getAllBookings
     ✓ should return all bookings if they exist in DB
 

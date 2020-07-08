@@ -40,7 +40,7 @@ function connectToMongo(done) {
 				console.log('Error connecting to MongoDB');
 				done();
 			} else {
-				console.log('Connected to Tooth Inc. database');
+				console.log('Connected to Tooth Inc. TEST database');
 				done();
 			}
 		}
@@ -65,12 +65,30 @@ function setupData() {
 }
 
 describe('getAllBookings', () => {
+	let req = {
+		query: {},
+	};
 	it('should return all bookings if they exist in DB', async function () {
-		let req = {
-			query: {},
-		};
 		await getAllBookings(req).exec((error, bookings) => {
 			expect(Object.keys(bookings).length).toBe(1);
+		});
+	});
+	it('the child_name should be JOE BLOGGS', async function () {
+		await getAllBookings(req).exec((error, bookings) => {
+			expect(bookings[0].child_name).toBe('JOE BLOGGS');
+		});
+	});
+});
+
+describe('getBookingById', () => {
+	it('should return the booking with username db_tester', async function () {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+		};
+		await getBookingById(req).exec((error, booking) => {
+			expect(booking.username).toBe('db_tester');
 		});
 	});
 });
