@@ -2,6 +2,7 @@ const {
 	getAllBookings,
 	getBookingById,
 	addBooking,
+	deleteBooking,
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
@@ -14,7 +15,7 @@ const getBooking = (req, res) => {
 	if (booking) {
 		res.send(booking);
 	} else {
-		res.status(404);
+		res.status(400);
 		res.send(req.error);
 	}
 };
@@ -32,7 +33,15 @@ const makeBooking = (req, res) => {
 
 const changeBooking = (req, res) => {};
 
-const removeBooking = (req, res) => {};
+const removeBooking = (req, res) => {
+	let bookings = deleteBooking(req);
+	if (req.error) {
+		res.status(req.status);
+		res.send(req.error);
+	} else {
+		res.send(bookings);
+	}
+};
 
 // functions to verify that the user is logged in and owns the booking
 

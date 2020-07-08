@@ -57,10 +57,12 @@ function deleteBooking(req) {
 			delete dummyBookings[id];
 			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
 		} else {
+			req.status = 400;
 			req.error = 'Post not found';
 		}
 		return dummyBookings;
 	} catch (error) {
+		req.status = 500;
 		req.error = error;
 	}
 }
