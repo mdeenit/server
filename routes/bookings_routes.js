@@ -18,6 +18,7 @@ router.get('/', getBookings);
 router.get('/:id', getBooking);
 
 // Make a booking
+router.post('/', makeBooking);
 
 // Update booking
 

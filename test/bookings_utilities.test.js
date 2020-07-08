@@ -5,6 +5,7 @@ const {
 	loadData,
 	getAllBookings,
 	getBookingById,
+	addBooking,
 } = require('../utils/bookings_utilities');
 
 beforeEach(() => {
@@ -42,6 +43,32 @@ describe('getBookingById', () => {
 		req.params.id = '2';
 		let booking = getBookingById(req);
 		expect(req.error).toBe('No booking found');
+	});
+});
+
+describe('addBooking', () => {
+	let req = {
+		body: {
+			child_name: 'John Smith',
+			username: 'second tester',
+			address: '123 sesame street',
+			city: 'Liverpool',
+			state: '',
+			postcode: 'L36',
+			continent: 'Europe',
+			currency: 'GBP',
+			teeth: 2,
+		},
+	};
+	it('should add the booking to the data file', () => {
+		addBooking(req);
+		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
+		let bookings = JSON.parse(bookingContent);
+		expect(Object.keys(bookings).length).toBe(2);
+	});
+	it('should return the new bookings', () => {
+		let newBooking = addBooking(req);
+		expect(newBooking.username).toBe(req.body.username);
 	});
 });
 
