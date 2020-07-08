@@ -21,6 +21,7 @@ const Booking = new Schema({
 	},
 	state: {
 		type: String,
+		default: '',
 	},
 	postcode: {
 		type: String,

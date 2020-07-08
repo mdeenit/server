@@ -93,6 +93,37 @@ describe('getBookingById', () => {
 	});
 });
 
+describe('makeBooking', () => {
+	let req = {
+		body: {
+			child_name: 'JOHN SMITH',
+			username: 'db_tester_2',
+			address: '999 Fake Street',
+			city: 'London',
+			postcode: 'L1',
+			continent: 'EUROPE',
+			currency: 'GBP',
+			teeth: 2,
+		},
+	};
+	it('should add and return a booking', async function () {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.username).toBe('db_tester_2');
+		});
+	});
+
+	it('should return default value for missing fields', async function () {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.state).toBe('');
+		});
+	});
+	it('should return open_status as true', async function () {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.open_status).toBe(true);
+		});
+	});
+});
+
 function clearData() {
 	return Booking.deleteMany();
 }

@@ -13,39 +13,10 @@ const getBookingById = (req) => {
 };
 
 const addBooking = (req) => {
-	try {
-		const {
-			child_name,
-			username,
-			address,
-			city,
-			state,
-			postcode,
-			continent,
-			currency,
-			teeth,
-		} = req.body;
-		const date = Date.now();
-		let newBooking = {
-			child_name: child_name,
-			username: username,
-			address: address,
-			city: city,
-			state: state || '',
-			postcode: postcode,
-			continent: continent,
-			currency: currency,
-			teeth: teeth,
-			created_at: date,
-			modified_date: date,
-		};
-
-		dummyBookings[getNextId()] = newBooking;
-		fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
-		return newBooking;
-	} catch (err) {
-		req.error = err;
-	}
+	let date = Date.now();
+	req.body.create_date = date;
+	req.body.modified_date = date;
+	return new Booking(req.body);
 };
 
 function deleteBooking(req) {
