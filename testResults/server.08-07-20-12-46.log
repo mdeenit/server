@@ -21,4 +21,4 @@ START----------------------
 
 END----------------------
 
-
+Note: Tested with static data file to test CRUD functions before connecting to Mongo Database. Tests that were used can be found at ./staticDataTests.js.

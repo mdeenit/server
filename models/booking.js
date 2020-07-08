@@ -12,21 +12,19 @@ const Booking = new Schema({
 		required: true,
 	},
 	address: {
-		line_1: {
-			type: String,
-			required: true,
-		},
-		city: {
-			type: String,
-			required: true,
-		},
-		state: {
-			type: String,
-		},
-		postcode: {
-			type: String,
-			required: true,
-		},
+		type: String,
+		required: true,
+	},
+	city: {
+		type: String,
+		required: true,
+	},
+	state: {
+		type: String,
+	},
+	postcode: {
+		type: String,
+		required: true,
 	},
 	teeth: {
 		type: Number,

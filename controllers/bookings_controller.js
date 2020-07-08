@@ -7,8 +7,19 @@ const {
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
-	let bookings = getAllBookings(req);
-	res.send(bookings);
+	getAllBookings(req)
+		.sort({
+			modified_date: -1,
+		})
+		.exec((error, bookings) => {
+			if (error) {
+				res.status = 500;
+				return res.json({
+					error: error.message,
+				});
+			}
+			res.send(bookings);
+		});
 };
 
 const getBooking = (req, res) => {
