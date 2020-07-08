@@ -46,13 +46,16 @@ const makeBooking = (req, res) => {
 };
 
 const changeBooking = (req, res) => {
-	let updatedBooking = updateBooking(req);
-	if (req.error) {
-		res.status(req.status);
-		res.send(req.error);
-	} else {
-		res.send(updatedBooking);
-	}
+	updateBooking(req).exec((error, booking) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.status(200);
+		res.send(booking);
+	});
 };
 
 const removeBooking = (req, res) => {

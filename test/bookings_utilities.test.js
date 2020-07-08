@@ -2,7 +2,6 @@ const expect = require('expect');
 const mongoose = require('mongoose');
 const Booking = require('../models/booking');
 const {
-	loadData,
 	getAllBookings,
 	getBookingById,
 	addBooking,
@@ -18,7 +17,7 @@ after((done) => {
 	mongoose.disconnect(() => done());
 });
 
-beforeEach(async function () {
+beforeEach(async () => {
 	let booking = await setupData();
 	bookingId = booking._id;
 });
@@ -68,12 +67,12 @@ describe('getAllBookings', () => {
 	let req = {
 		query: {},
 	};
-	it('should return all bookings if they exist in DB', async function () {
+	it('should return all bookings if they exist in DB', async () => {
 		await getAllBookings(req).exec((error, bookings) => {
 			expect(Object.keys(bookings).length).toBe(1);
 		});
 	});
-	it('the child_name should be JOE BLOGGS', async function () {
+	it('the child_name should be JOE BLOGGS', async () => {
 		await getAllBookings(req).exec((error, bookings) => {
 			expect(bookings[0].child_name).toBe('JOE BLOGGS');
 		});
@@ -81,7 +80,7 @@ describe('getAllBookings', () => {
 });
 
 describe('getBookingById', () => {
-	it('should return the booking with username db_tester', async function () {
+	it('should return the booking with username db_tester', async () => {
 		let req = {
 			params: {
 				id: bookingId,
@@ -106,18 +105,18 @@ describe('makeBooking', () => {
 			teeth: 2,
 		},
 	};
-	it('should add and return a booking', async function () {
+	it('should add and return a booking', async () => {
 		await addBooking(req).save((error, booking) => {
 			expect(booking.username).toBe('db_tester_2');
 		});
 	});
 
-	it('should return default value for missing fields', async function () {
+	it('should return default value for missing fields', async () => {
 		await addBooking(req).save((error, booking) => {
 			expect(booking.state).toBe('');
 		});
 	});
-	it('should return open_status as true', async function () {
+	it('should return open_status as true', async () => {
 		await addBooking(req).save((error, booking) => {
 			expect(booking.open_status).toBe(true);
 		});
@@ -134,6 +133,23 @@ describe('deleteBooking', () => {
 		await deleteBooking(req).exec();
 		await getBookingById(req).exec((error, booking) => {
 			expect(booking).toBe(null);
+		});
+	});
+});
+
+describe('updateBooking', () => {
+	it('should update the specified booking and specified fields', async () => {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+			body: {
+				teeth: 7,
+			},
+		};
+		await updateBooking(req).exec((error, booking) => {
+			expect(booking.teeth).toBe(req.body.teeth);
+			expect(booking.username).toBe('db_tester');
 		});
 	});
 });
