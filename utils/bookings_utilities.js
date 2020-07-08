@@ -6,6 +6,8 @@ const getAllBookings = (req) => {};
 
 const getBookingById = (req) => {};
 
-function loadData(path) {}
+function loadData(file) {
+	dummyBookings = JSON.parse(fs.readFileSync(file, 'utf8'));
+}
 
-module.exports = { getAllBookings, getBookingById };
+module.exports = { getAllBookings, getBookingById, loadData };
