@@ -1,12 +1,56 @@
-const getBookings = (req, res) => {};
+const {
+	getAllBookings,
+	getBookingById,
+	addBooking,
+	deleteBooking,
+	updateBooking,
+} = require('../utils/bookings_utilities');
 
-const getBooking = (req, res) => {};
+const getBookings = (req, res) => {
+	let bookings = getAllBookings(req);
+	res.send(bookings);
+};
 
-const makeBooking = (req, res) => {};
+const getBooking = (req, res) => {
+	let booking = getBookingById(req);
+	if (booking) {
+		res.send(booking);
+	} else {
+		res.status(400);
+		res.send(req.error);
+	}
+};
 
-const changeBooking = (req, res) => {};
+const makeBooking = (req, res) => {
+	const newBooking = addBooking(req);
+	if (newBooking) {
+		res.status(201);
+		res.send(newBooking);
+	} else {
+		res.status(500);
+		res.send(req.error);
+	}
+};
 
-const removeBooking = (req, res) => {};
+const changeBooking = (req, res) => {
+	let booking = updateBooking(req);
+	if (req.error) {
+		res.status(req.status);
+		res.send(req.error);
+	} else {
+		res.send(booking);
+	}
+};
+
+const removeBooking = (req, res) => {
+	let bookings = deleteBooking(req);
+	if (req.error) {
+		res.status(req.status);
+		res.send(req.error);
+	} else {
+		res.send(bookings);
+	}
+};
 
 // functions to verify that the user is logged in and owns the booking
 

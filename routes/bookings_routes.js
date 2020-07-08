@@ -9,17 +9,21 @@ const {
 	removeBooking,
 } = require('../controllers/bookings_controller');
 
+// Authenticate user
+
 // Read all bookings
 router.get('/', getBookings);
 
 // Read booking with :id
-
-// Authenticate user
+router.get('/:id', getBooking);
 
 // Make a booking
-
-// Update booking
+router.post('/', makeBooking);
 
 // Delete booking
+router.delete('/:id', removeBooking);
+
+// Delete booking
+router.patch('/:id', changeBooking);
 
 module.exports = router;
