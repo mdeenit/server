@@ -64,6 +64,17 @@ function setupData() {
 	return Booking.create(testBooking);
 }
 
+describe('getAllBookings', () => {
+	it('should return all bookings if they exist in DB', async function () {
+		let req = {
+			query: {},
+		};
+		await getAllBookings(req).exec((error, bookings) => {
+			expect(Object.keys(bookings).length).toBe(1);
+		});
+	});
+});
+
 function clearData() {
 	return Booking.deleteMany();
 }
