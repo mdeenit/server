@@ -1,0 +1,24 @@
+08-07-20-12-46
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+  Setup data
+    ✓ should populate test file with data
+
+  getAllBookings
+    ✓ should return all bookings from dummy data file
+
+  getBookingById
+    ✓ should return the correct booking based on id
+    ✓ should set req.error when given an invalid id
+
+
+  4 passing (12ms)
+
+END----------------------
+
+
