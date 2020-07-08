@@ -20,20 +20,7 @@ const addBooking = (req) => {
 };
 
 function deleteBooking(req) {
-	const id = req.params.id;
-	try {
-		if (dummyBookings[id]) {
-			delete dummyBookings[id];
-			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
-		} else {
-			req.status = 400;
-			req.error = 'Booking not found';
-		}
-		return dummyBookings;
-	} catch (error) {
-		req.status = 500;
-		req.error = error;
-	}
+	return Booking.findByIdAndDelete(req.params.id);
 }
 
 function updateBooking(req) {

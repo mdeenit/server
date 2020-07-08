@@ -56,13 +56,15 @@ const changeBooking = (req, res) => {
 };
 
 const removeBooking = (req, res) => {
-	let bookings = deleteBooking(req);
-	if (req.error) {
-		res.status(req.status);
-		res.send(req.error);
-	} else {
-		res.send(bookings);
-	}
+	deleteBooking(req).exec((error, booking) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.sendStatus(204);
+	});
 };
 
 // functions to verify that the user is logged in and owns the booking

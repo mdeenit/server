@@ -124,6 +124,20 @@ describe('makeBooking', () => {
 	});
 });
 
+describe('deleteBooking', () => {
+	it('should delete the specified booking', async () => {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+		};
+		await deleteBooking(req).exec();
+		await getBookingById(req).exec((error, booking) => {
+			expect(booking).toBe(null);
+		});
+	});
+});
+
 function clearData() {
 	return Booking.deleteMany();
 }
