@@ -1,8 +1,7 @@
 const expect = require('expect');
-const dummyDataFile = './data/dummy_bookings.test.json';
-const fs = require('fs');
+const mongoose = require('mongoose');
+const Booking = require('../models/booking');
 const {
-	loadData,
 	getAllBookings,
 	getBookingById,
 	addBooking,
@@ -10,126 +9,151 @@ const {
 	updateBooking,
 } = require('../utils/bookings_utilities');
 
-beforeEach(() => {
-	setupData();
+const databaseConnection = 'mongodb://localhost/tooth_inc_test';
+let bookingId = null;
+
+before((done) => connectToMongo(done));
+after((done) => {
+	mongoose.disconnect(() => done());
 });
 
-describe('Setup data', () => {
-	it('should populate test file with data', () => {
-		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
-		expect(bookingContent.length).toBeGreaterThan(3);
-		let bookings = JSON.parse(bookingContent);
-		expect(bookings['1'].child_name).toBe('test data child name');
-	});
+beforeEach(async () => {
+	let booking = await setupData();
+	bookingId = booking._id;
 });
+
+afterEach((done) => {
+	clearData().exec(() => done());
+});
+
+function connectToMongo(done) {
+	mongoose.connect(
+		databaseConnection,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useFindAndModify: true,
+		},
+		(error) => {
+			if (error) {
+				console.log('Error connecting to MongoDB');
+				done();
+			} else {
+				console.log('Connected to Tooth Inc. TEST database');
+				done();
+			}
+		}
+	);
+}
+
+function setupData() {
+	let date = Date.now();
+	let testBooking = {};
+	testBooking.child_name = 'JOE BLOGGS';
+	testBooking.username = 'db_tester';
+	testBooking.address = '123 Fake Street';
+	testBooking.city = 'Sydney';
+	testBooking.state = 'NSW';
+	testBooking.postcode = '2204';
+	testBooking.continent = 'AUSTRALIA';
+	testBooking.currency = 'AUD';
+	testBooking.teeth = 2;
+	testBooking.create_date = date;
+	testBooking.modified_date = date;
+	return Booking.create(testBooking);
+}
 
 describe('getAllBookings', () => {
-	it('should return all bookings from dummy data file', () => {
-		let bookings = getAllBookings({});
-		expect(Object.keys(bookings).length).toBe(1);
-		expect(bookings['1'].child_name).toBe('test data child name');
+	let req = {
+		query: {},
+	};
+	it('should return all bookings if they exist in DB', async () => {
+		await getAllBookings(req).exec((error, bookings) => {
+			expect(Object.keys(bookings).length).toBe(1);
+		});
+	});
+	it('the child_name should be JOE BLOGGS', async () => {
+		await getAllBookings(req).exec((error, bookings) => {
+			expect(bookings[0].child_name).toBe('JOE BLOGGS');
+		});
 	});
 });
 
 describe('getBookingById', () => {
-	let req = {
-		params: {
-			id: '1',
-		},
-	};
-	it('should return the correct booking based on id', () => {
-		let booking = getBookingById(req);
-		expect(booking.username).toBe('test data username');
-	});
-	it('should set req.error when given an invalid id', () => {
-		req.params.id = '2';
-		let booking = getBookingById(req);
-		expect(req.error).toBe('No booking found');
+	it('should return the booking with username db_tester', async () => {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+		};
+		await getBookingById(req).exec((error, booking) => {
+			expect(booking.username).toBe('db_tester');
+		});
 	});
 });
 
-describe('addBooking', () => {
+describe('makeBooking', () => {
 	let req = {
 		body: {
-			child_name: 'John Smith',
-			username: 'second tester',
-			address: '123 sesame street',
-			city: 'Liverpool',
-			state: '',
-			postcode: 'L36',
-			continent: 'Europe',
+			child_name: 'JOHN SMITH',
+			username: 'db_tester_2',
+			address: '999 Fake Street',
+			city: 'London',
+			postcode: 'L1',
+			continent: 'EUROPE',
 			currency: 'GBP',
 			teeth: 2,
 		},
 	};
-	it('should add the booking to the data file', () => {
-		addBooking(req);
-		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
-		let bookings = JSON.parse(bookingContent);
-		expect(Object.keys(bookings).length).toBe(2);
+	it('should add and return a booking', async () => {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.username).toBe('db_tester_2');
+		});
 	});
-	it('should return the new bookings', () => {
-		let newBooking = addBooking(req);
-		expect(newBooking.username).toBe(req.body.username);
+
+	it('should return default value for missing fields', async () => {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.state).toBe('');
+		});
+	});
+	it('should return open_status as true', async () => {
+		await addBooking(req).save((error, booking) => {
+			expect(booking.open_status).toBe(true);
+		});
 	});
 });
 
 describe('deleteBooking', () => {
-	let req = {
-		params: {
-			id: '1',
-		},
-	};
-	it('should delete the correct booking from the data file', () => {
-		let bookings = deleteBooking(req);
-		expect(Object.keys(bookings).length).toBe(0);
-	});
-	it('should update the data file', () => {
-		deleteBooking(req);
-		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
-		let bookings = JSON.parse(bookingContent);
-		expect(Object.keys(bookings).length).toBe(0);
+	it('should delete the specified booking', async () => {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+		};
+		await deleteBooking(req).exec();
+		await getBookingById(req).exec((error, booking) => {
+			expect(booking).toBe(null);
+		});
 	});
 });
 
 describe('updateBooking', () => {
-	let req = {
-		params: {
-			id: '1',
-		},
-		body: {
-			child_name: 'updated name',
-			teeth: '4',
-		},
-	};
-	it('should update the booking and return it', () => {
-		let booking = updateBooking(req);
-		expect(booking.teeth).toBe('4');
-	});
-	it('should only update given data', () => {
-		let booking = updateBooking(req);
-		expect(booking.username).toBe('test data username');
+	it('should update the specified booking and specified fields', async () => {
+		let req = {
+			params: {
+				id: bookingId,
+			},
+			body: {
+				teeth: 7,
+			},
+		};
+		await updateBooking(req).exec((error, booking) => {
+			expect(booking.teeth).toBe(req.body.teeth);
+			expect(booking.username).toBe('db_tester');
+		});
 	});
 });
 
-function setupData() {
-	let testBookingData = {};
-	let testBooking = {};
-	let date = Date.now();
-	testBooking.child_name = 'test data child name';
-	testBooking.username = 'test data username';
-	testBooking.address = 'test street';
-	testBooking.city = 'test city';
-	testBooking.state = 'test state';
-	testBooking.postcode = 'test postcode';
-	testBooking.continent = 'EUROPE';
-	testBooking.currency = 'EUR';
-	testBooking.teeth = 2;
-	testBooking.open_status = true;
-	testBooking.review_status = false;
-	testBooking.create_date = date;
-	testBooking.modified_date = date;
-	testBookingData['1'] = testBooking;
-	fs.writeFileSync(dummyDataFile, JSON.stringify(testBookingData));
-	loadData(dummyDataFile);
+function clearData() {
+	return Booking.deleteMany();
 }

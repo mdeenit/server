@@ -1,4 +1,4 @@
-08-07-20-15-50
+08-07-20-12-46
 START----------------------
 
 > server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
@@ -16,21 +16,9 @@ START----------------------
     ✓ should return the correct booking based on id
     ✓ should set req.error when given an invalid id
 
-  addBooking
-    ✓ should add the booking to the data file
-    ✓ should return the new bookings
 
-  deleteBooking
-    ✓ should delete the correct booking from the data file
-    ✓ should update the data file
-
-  updateBooking
-    ✓ should update the booking and return it
-    ✓ should only update given data
-
-
-  10 passing (21ms)
+  4 passing (12ms)
 
 END----------------------
 
-
+Note: Tested with static data file to test CRUD functions before connecting to Mongo Database. Tests that were used can be found at ./staticDataTests.js.

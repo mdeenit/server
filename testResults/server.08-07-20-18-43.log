@@ -1,0 +1,32 @@
+08-07-20-18-43
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+  0 passing (1ms)
+
+END----------------------
+
+Note: Missing clearData function. Need to add for tets to run.
+
+08-07-20-18-43
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+Connected to Tooth Inc. TEST database
+  getAllBookings
+    ✓ should return all bookings if they exist in DB
+
+
+  1 passing (59ms)
+
+END----------------------
+
+
