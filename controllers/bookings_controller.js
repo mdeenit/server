@@ -3,6 +3,7 @@ const {
 	getBookingById,
 	addBooking,
 	deleteBooking,
+	updateBooking,
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
@@ -31,7 +32,15 @@ const makeBooking = (req, res) => {
 	}
 };
 
-const changeBooking = (req, res) => {};
+const changeBooking = (req, res) => {
+	let booking = updateBooking(req);
+	if (req.error) {
+		res.status(req.status);
+		res.send(req.error);
+	} else {
+		res.send(booking);
+	}
+};
 
 const removeBooking = (req, res) => {
 	let bookings = deleteBooking(req);

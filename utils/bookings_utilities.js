@@ -58,7 +58,7 @@ function deleteBooking(req) {
 			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
 		} else {
 			req.status = 400;
-			req.error = 'Post not found';
+			req.error = 'Booking not found';
 		}
 		return dummyBookings;
 	} catch (error) {
@@ -97,13 +97,16 @@ function updateBooking(req) {
 				create_date: existingBooking.create_date,
 				modified_date: date,
 			};
-			dummyBookings[id] = updateBooking;
+			dummyBookings[id] = updatedBooking;
 			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
 			return updatedBooking;
+		} else {
+			req.status = 400;
+			req.error = 'Booking not found';
 		}
 	} catch (error) {
 		req.status = 400;
-		req.error = 'Post not found';
+		req.error = 'Booking not found';
 	}
 }
 
