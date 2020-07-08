@@ -1,7 +1,7 @@
 const expect = require('expect');
 const dummyDataFile = './data/dummy_bookings.test.json';
 const fs = require('fs');
-const { loadData } = require('../utils/bookings_utilities');
+const { loadData, getAllBookings } = require('../utils/bookings_utilities');
 
 beforeEach(() => {
 	setupData();
@@ -12,6 +12,14 @@ describe('Setup data', () => {
 		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
 		expect(bookingContent.length).toBeGreaterThan(3);
 		let bookings = JSON.parse(bookingContent);
+		expect(bookings['1'].child_name).toBe('test data child name');
+	});
+});
+
+describe('getAllBookings', () => {
+	it('should return all bookings from dummy data file', () => {
+		let bookings = getAllBookings({});
+		expect(Object.keys(bookings).length).toBe(1);
 		expect(bookings['1'].child_name).toBe('test data child name');
 	});
 });
