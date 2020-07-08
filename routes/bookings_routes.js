@@ -20,9 +20,10 @@ router.get('/:id', getBooking);
 // Make a booking
 router.post('/', makeBooking);
 
-// Update booking
+// Delete booking
 router.delete('/:id', removeBooking);
 
 // Delete booking
+router.patch('/:id', changeBooking);
 
 module.exports = router;

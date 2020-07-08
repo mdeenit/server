@@ -7,6 +7,7 @@ const {
 	getBookingById,
 	addBooking,
 	deleteBooking,
+	updateBooking,
 } = require('../utils/bookings_utilities');
 
 beforeEach(() => {
@@ -88,6 +89,26 @@ describe('deleteBooking', () => {
 		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
 		let bookings = JSON.parse(bookingContent);
 		expect(Object.keys(bookings).length).toBe(0);
+	});
+});
+
+describe('updateBooking', () => {
+	let req = {
+		params: {
+			id: '1',
+		},
+		body: {
+			child_name: 'updated name',
+			teeth: '4',
+		},
+	};
+	it('should update the booking and return it', () => {
+		let booking = updateBooking(req);
+		expect(booking.teeth).toBe('4');
+	});
+	it('should only update given data', () => {
+		let booking = updateBooking(req);
+		expect(booking.username).toBe('test data username');
 	});
 });
 

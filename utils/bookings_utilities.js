@@ -67,6 +67,46 @@ function deleteBooking(req) {
 	}
 }
 
+function updateBooking(req) {
+	let id = req.params.id;
+	let existingBooking = dummyBookings[id];
+	try {
+		if (existingBooking) {
+			const {
+				child_name,
+				username,
+				address,
+				city,
+				state,
+				postcode,
+				continent,
+				currency,
+				teeth,
+			} = req.body;
+			const date = Date.now();
+			const updatedBooking = {
+				child_name: child_name || existingBooking.child_name,
+				username: username || existingBooking.username,
+				address: address || existingBooking.address,
+				city: city || existingBooking.city,
+				state: state || existingBooking.state,
+				postcode: postcode || existingBooking.postcode,
+				continent: continent || existingBooking.continent,
+				currency: currency || existingBooking.currency,
+				teeth: teeth || existingBooking.teeth,
+				create_date: existingBooking.create_date,
+				modified_date: date,
+			};
+			dummyBookings[id] = updateBooking;
+			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
+			return updatedBooking;
+		}
+	} catch (error) {
+		req.status = 400;
+		req.error = 'Post not found';
+	}
+}
+
 // for testing
 function loadData(file) {
 	dataFile = file;
@@ -86,4 +126,5 @@ module.exports = {
 	loadData,
 	addBooking,
 	deleteBooking,
+	updateBooking,
 };
