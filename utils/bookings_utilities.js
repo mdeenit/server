@@ -7,3 +7,5 @@ const getAllBookings = (req) => {};
 const getBookingById = (req) => {};
 
 function loadData(path) {}
+
+module.exports = { getAllBookings, getBookingById };
