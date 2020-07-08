@@ -13,9 +13,10 @@ const getBooking = (req, res) => {
 	let booking = getBookingById(req);
 	if (booking) {
 		res.send(booking);
+	} else {
+		res.status(404);
+		res.send(req.error);
 	}
-	res.status(404);
-	res.send(req.error);
 };
 
 const makeBooking = (req, res) => {

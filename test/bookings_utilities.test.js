@@ -6,6 +6,7 @@ const {
 	getAllBookings,
 	getBookingById,
 	addBooking,
+	deleteBooking,
 } = require('../utils/bookings_utilities');
 
 beforeEach(() => {
@@ -69,6 +70,24 @@ describe('addBooking', () => {
 	it('should return the new bookings', () => {
 		let newBooking = addBooking(req);
 		expect(newBooking.username).toBe(req.body.username);
+	});
+});
+
+describe('deleteBooking', () => {
+	let req = {
+		params: {
+			id: '1',
+		},
+	};
+	it('should delete the correct booking from the data file', () => {
+		let bookings = deleteBooking(req);
+		expect(Object.keys(bookings).length).toBe(0);
+	});
+	it('should update the data file', () => {
+		deleteBooking(req);
+		let bookingContent = fs.readFileSync(dummyDataFile, 'utf8');
+		let bookings = JSON.parse(bookingContent);
+		expect(Object.keys(bookings).length).toBe(0);
 	});
 });
 

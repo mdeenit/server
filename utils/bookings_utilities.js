@@ -50,6 +50,21 @@ const addBooking = (req) => {
 	}
 };
 
+function deleteBooking(req) {
+	const id = req.params.id;
+	try {
+		if (dummyBookings[id]) {
+			delete dummyBookings[id];
+			fs.writeFileSync(`./${dataFile}`, JSON.stringify(dummyBookings));
+		} else {
+			req.error = 'Post not found';
+		}
+		return dummyBookings;
+	} catch (error) {
+		req.error = error;
+	}
+}
+
 // for testing
 function loadData(file) {
 	dataFile = file;
@@ -63,4 +78,10 @@ function getNextId() {
 	return parseInt(lastId) + 1;
 }
 
-module.exports = { getAllBookings, getBookingById, loadData, addBooking };
+module.exports = {
+	getAllBookings,
+	getBookingById,
+	loadData,
+	addBooking,
+	deleteBooking,
+};

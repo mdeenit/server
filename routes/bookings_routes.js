@@ -21,6 +21,7 @@ router.get('/:id', getBooking);
 router.post('/', makeBooking);
 
 // Update booking
+router.delete('/:id', removeBooking);
 
 // Delete booking
 
