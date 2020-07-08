@@ -1,7 +1,7 @@
 {
 	"1": {
 		"child_name": "frank",
-		"username": "test_user_one",
+		"username": "user_one",
 		"address": "1 test street",
 		"city": "sydney",
 		"state": "nsw",
@@ -14,7 +14,7 @@
 	},
 	"2": {
 		"child_name": "jane",
-		"username": "test_user_two",
+		"username": "user_two",
 		"address": "2 test street",
 		"city": "london",
 		"state": "",
@@ -24,5 +24,18 @@
 		"teeth": 2,
 		"open_status": true,
 		"review_status": false
+	},
+	"3": {
+		"child_name": "chris",
+		"username": "user_three",
+		"address": "test street",
+		"city": "test city",
+		"state": "test state",
+		"postcode": "test postcode",
+		"continent": "EUROPE",
+		"currency": "EUR",
+		"teeth": 2,
+		"created_at": 1594180981547,
+		"modified_date": 1594180981547
 	}
 }

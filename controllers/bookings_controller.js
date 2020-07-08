@@ -1,6 +1,7 @@
 const {
 	getAllBookings,
 	getBookingById,
+	addBooking,
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
@@ -17,7 +18,16 @@ const getBooking = (req, res) => {
 	res.send(req.error);
 };
 
-const makeBooking = (req, res) => {};
+const makeBooking = (req, res) => {
+	const newBooking = addBooking(req);
+	if (newBooking) {
+		res.status(201);
+		res.send(newBooking);
+	} else {
+		res.status(500);
+		res.send(req.error);
+	}
+};
 
 const changeBooking = (req, res) => {};
 
