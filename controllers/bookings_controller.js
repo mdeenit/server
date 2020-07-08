@@ -33,12 +33,12 @@ const makeBooking = (req, res) => {
 };
 
 const changeBooking = (req, res) => {
-	let booking = updateBooking(req);
+	let updatedBooking = updateBooking(req);
 	if (req.error) {
 		res.status(req.status);
 		res.send(req.error);
 	} else {
-		res.send(booking);
+		res.send(updatedBooking);
 	}
 };
 
