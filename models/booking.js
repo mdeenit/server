@@ -26,6 +26,10 @@ const Booking = new Schema({
 		type: String,
 		required: true,
 	},
+	continent: {
+		type: String,
+		required: true,
+	},
 	teeth: {
 		type: Number,
 		required: true,
@@ -45,6 +49,10 @@ const Booking = new Schema({
 	open_status: {
 		type: Boolean,
 		default: true,
+	},
+	review_status: {
+		type: Boolean,
+		default: false,
 	},
 });
 
