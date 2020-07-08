@@ -1,0 +1,20 @@
+08-07-20-12-12
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+  Setup data
+    ✓ should populate test file with data
+
+  getAllBookings
+    ✓ should return all bookings from dummy data file
+
+
+  2 passing (10ms)
+
+END----------------------
+
+Note: Tested with static data file to test CRUD functions before connecting to Mongo Database. Tests that were used can be found at ./staticDataTests.js.

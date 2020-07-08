@@ -7,49 +7,67 @@ const {
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
-	let bookings = getAllBookings(req);
-	res.send(bookings);
+	getAllBookings(req)
+		.sort({
+			modified_date: -1,
+		})
+		.exec((error, bookings) => {
+			if (error) {
+				res.status(500);
+				return res.json({
+					error: error.message,
+				});
+			}
+			res.send(bookings);
+		});
 };
 
 const getBooking = (req, res) => {
-	let booking = getBookingById(req);
-	if (booking) {
+	getBookingById(req).exec((error, booking) => {
+		if (error) {
+			res.status(404);
+			return res.send('Booking not found');
+		}
 		res.send(booking);
-	} else {
-		res.status(400);
-		res.send(req.error);
-	}
+	});
 };
 
 const makeBooking = (req, res) => {
-	const newBooking = addBooking(req);
-	if (newBooking) {
+	addBooking(req).save((error, booking) => {
+		if (error) {
+			res.status;
+			res.json({
+				error: error.message,
+			});
+		}
 		res.status(201);
-		res.send(newBooking);
-	} else {
-		res.status(500);
-		res.send(req.error);
-	}
+		res.send(booking);
+	});
 };
 
 const changeBooking = (req, res) => {
-	let updatedBooking = updateBooking(req);
-	if (req.error) {
-		res.status(req.status);
-		res.send(req.error);
-	} else {
-		res.send(updatedBooking);
-	}
+	updateBooking(req).exec((error, booking) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.status(200);
+		res.send(booking);
+	});
 };
 
 const removeBooking = (req, res) => {
-	let bookings = deleteBooking(req);
-	if (req.error) {
-		res.status(req.status);
-		res.send(req.error);
-	} else {
-		res.send(bookings);
-	}
+	deleteBooking(req).exec((error, booking) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.sendStatus(204);
+	});
 };
 
 // functions to verify that the user is logged in and owns the booking

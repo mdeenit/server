@@ -1,4 +1,4 @@
-08-07-20-14-42
+08-07-20-15-50
 START----------------------
 
 > server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
@@ -24,9 +24,13 @@ START----------------------
     ✓ should delete the correct booking from the data file
     ✓ should update the data file
 
+  updateBooking
+    ✓ should update the booking and return it
+    ✓ should only update given data
 
-  8 passing (26ms)
+
+  10 passing (21ms)
 
 END----------------------
 
-
+Note: Tested with static data file to test CRUD functions before connecting to Mongo Database. Tests that were used can be found at ./staticDataTests.js.

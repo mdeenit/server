@@ -1,0 +1,22 @@
+08-07-20-19-06
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+Connected to Tooth Inc. TEST database
+  getAllBookings
+    ✓ should return all bookings if they exist in DB
+    ✓ the child_name should be JOE BLOGGS
+
+  getBookingById
+    ✓ should return the booking with username db_tester
+
+
+  3 passing (82ms)
+
+END----------------------
+
+

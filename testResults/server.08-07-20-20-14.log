@@ -1,0 +1,33 @@
+08-07-20-20-14
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server
+> mocha
+
+
+
+Connected to Tooth Inc. TEST database
+  updateBooking
+    ✓ should update the specified booking
+    1) should update the specified booking
+
+
+  1 passing (67ms)
+  1 failing
+
+  1) updateBooking
+       should update the specified booking:
+     Uncaught TypeError: Cannot read property 'teeth' of null
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/test/bookings_utilities.test.js:151:19
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/node_modules/mongoose/lib/model.js:4882:16
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:24:16
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/node_modules/mongoose/lib/model.js:4905:21
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/node_modules/mongoose/lib/query.js:4390:11
+      at /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/server/node_modules/kareem/index.js:135:16
+      at processTicksAndRejections (internal/process/task_queues.js:79:11)
+
+
+
+END----------------------
+
+
