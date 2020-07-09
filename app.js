@@ -32,6 +32,24 @@ mongoose.connect(
 	}
 );
 
+app.use(
+	session({
+		secret: 'The Tooth Inc secret string',
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			maxAge: 1800000,
+		},
+		store: new MongoStore({
+			mongooseConnection: mongoose.connection,
+		}),
+	})
+);
+// to test session and send response to client
+app.get('/', (req, res) => {
+	console.log(req.session);
+	res.send(req.session);
+});
 app.get('/', (req, res) => {
 	res.send('Welcome to Tooth Inc!');
 });
