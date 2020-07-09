@@ -22,6 +22,7 @@ mongoose.connect(
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: true,
+		useCreateIndex: true,
 	},
 	(error) => {
 		if (error) {
@@ -45,6 +46,9 @@ app.use(
 		}),
 	})
 );
+require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 // to test session and send response to client
 app.get('/', (req, res) => {
 	console.log(req.session);
