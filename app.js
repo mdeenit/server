@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 //routers
 const bookingRouter = require('./routes/bookings_routes');
+const authRouter = require('./routes/auth_routes');
 
 const port = process.env.PORT || 3030;
 const app = express();
@@ -59,6 +60,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/bookings', bookingRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, () => {
 	console.log(`Tooth Inc Server running on port ${port}`);
