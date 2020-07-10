@@ -15,17 +15,19 @@ const register = (req, res) => {
 					error: error,
 				});
 			} else {
-				passport.authenticate('local')(req, res, () => {
-					console.log('authenticated user: ', req.user.username);
-					console.log('session: ', req.session);
-					res.json(req.user);
-				});
+				login(req, res);
 			}
 		}
 	);
 };
 
-const login = (req, res) => {};
+const login = (req, res) => {
+	passport.authenticate('local')(req, res, () => {
+		console.log('authenticated user: ', req.user.username);
+		console.log('session: ', req.session);
+		res.json(req.user);
+	});
+};
 
 const logout = (req, res) => {};
 
