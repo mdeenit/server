@@ -7,7 +7,7 @@ echo $LOG
 echo $DATE | tee -a $LOG
 
 echo "START----------------------" | tee -a $LOG
-npm test | tee -a $LOG
+npm test -- --exit | tee -a $LOG
 echo "END----------------------" | tee -a $LOG
 echo | tee -a $LOG
 echo | tee -a $LOG

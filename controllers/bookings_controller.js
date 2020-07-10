@@ -33,6 +33,8 @@ const getBooking = (req, res) => {
 };
 
 const makeBooking = (req, res) => {
+	req.body.modified_date = new Date();
+	req.body.username = req.user.username;
 	addBooking(req).save((error, booking) => {
 		if (error) {
 			res.status;
@@ -70,7 +72,13 @@ const removeBooking = (req, res) => {
 	});
 };
 
-// functions to verify that the user is logged in and owns the booking
+const userAuthenticated = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		next();
+	} else {
+		res.sendStatus(403);
+	}
+};
 
 module.exports = {
 	getBookings,
@@ -78,4 +86,5 @@ module.exports = {
 	makeBooking,
 	changeBooking,
 	removeBooking,
+	userAuthenticated,
 };
