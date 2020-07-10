@@ -70,7 +70,13 @@ const removeBooking = (req, res) => {
 	});
 };
 
-// functions to verify that the user is logged in and owns the booking
+const userAuthenticated = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		next();
+	} else {
+		res.sendStatus(403);
+	}
+};
 
 module.exports = {
 	getBookings,
@@ -78,4 +84,5 @@ module.exports = {
 	makeBooking,
 	changeBooking,
 	removeBooking,
+	userAuthenticated,
 };
