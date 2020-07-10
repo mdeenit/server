@@ -34,7 +34,7 @@ mongoose.connect(
 		if (error) {
 			console.log('Error connecting to MongoDB');
 		} else {
-			console.log('Connected to Tooth Inc. database');
+			console.log('Connected to Tooth Inc. database', databaseConnection);
 		}
 	}
 );
