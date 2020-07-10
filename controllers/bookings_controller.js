@@ -33,6 +33,8 @@ const getBooking = (req, res) => {
 };
 
 const makeBooking = (req, res) => {
+	req.body.modified_date = new Date();
+	req.body.username = req.user.username;
 	addBooking(req).save((error, booking) => {
 		if (error) {
 			res.status;
