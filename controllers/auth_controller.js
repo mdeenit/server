@@ -29,6 +29,9 @@ const login = (req, res) => {
 	});
 };
 
-const logout = (req, res) => {};
+const logout = (req, res) => {
+	req.logout();
+	res.sendStatus(200);
+};
 
 module.exports = { register, login, logout };
