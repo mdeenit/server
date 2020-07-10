@@ -11,13 +11,14 @@ after((done) => {
 });
 
 beforeEach(async () => {
+	await clearData().exec();
 	let user = await setupData();
 	UserId = user._id;
 });
 
-afterEach((done) => {
-	clearData().exec(() => done());
-});
+// afterEach((done) => {
+// 	clearData().exec(() => done());
+// });
 
 function connectToMongo(done) {
 	mongoose.connect(
@@ -26,6 +27,7 @@ function connectToMongo(done) {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: true,
+			useCreateIndex: true,
 		},
 		(error) => {
 			if (error) {
@@ -49,6 +51,22 @@ function setupData() {
 	testUser.modified_date = date;
 	return User.create(testUser);
 }
+
+describe.only('register', () => {
+	let req = {
+		body: {
+			username: 'JOHN SMITH',
+			email: 'john@smith.com',
+			password: '123456',
+		},
+	};
+	it('should add and a new user', async () => {
+		await register(req);
+		const user = await User.find();
+		expect(user.length).toBe(1);
+		// console.log('test here');
+	});
+});
 
 function clearData() {
 	return User.deleteMany();

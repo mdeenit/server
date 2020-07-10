@@ -1,0 +1,19 @@
+10-07-20-09-42
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/MERN-server
+> mocha "--exit"
+
+
+
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+  register
+    ✓ should add and a new user
+
+
+  1 passing (81ms)
+
+END----------------------
+
+Notes: BeforeEach hook removes any data from the test DB before each test. We can assume that the User collection is empty hence testing for length of users to be 1 if a user has been created.
