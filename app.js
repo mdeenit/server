@@ -15,7 +15,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const databaseConnection = 'mongodb://localhost/tooth_inc';
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
+
+const databaseConnection =
+	process.env.MONGODB_URI || 'mongodb://localhost/tooth_inc';
 
 mongoose.connect(
 	databaseConnection,
