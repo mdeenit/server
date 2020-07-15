@@ -33,6 +33,7 @@ const login = (req, res) => {
 const logout = (req, res) => {
 	req.logout();
 	res.sendStatus(200);
+	console.log('User logged out');
 };
 
 module.exports = { register, login, logout };

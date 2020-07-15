@@ -1,13 +1,14 @@
 const Booking = require('../models/booking');
 
 const getAllBookings = (req) => {
-	if (req.query.admin) {
-		return Booking.find();
-	}
-	if (req.query.username) {
-		return Booking.findByUsername(req.query.username); // need to create this function
-	}
-	return null;
+	return Booking.find();
+	// if (req.query.admin) {
+	// 	return Booking.find();
+	// }
+	// if (req.query.username) {
+	// 	return Booking.findByUsername(req.query.username); // need to create this function
+	// }
+	// return null;
 };
 
 const getBookingById = (req) => {
