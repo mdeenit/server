@@ -57,4 +57,10 @@ const Booking = new Schema({
 	},
 });
 
+Booking.statics.findByUsername = function (username) {
+	return this.find({
+		username: username,
+	});
+};
+
 module.exports = mongoose.model('Booking', Booking);
