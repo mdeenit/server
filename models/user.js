@@ -7,6 +7,9 @@ const User = new Schema({
 		type: String,
 		required: true,
 	},
+	admin: {
+		type: Boolean,
+	},
 });
 
 User.plugin(passportLocalMongoose);
