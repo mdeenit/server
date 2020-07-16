@@ -16,6 +16,9 @@ const allowList = [
 	'http://localhost:3000',
 	'https://lucid-wright-444fce.netlify.app',
 	'https://development--lucid-wright-444fce.netlify.app',
+	'https://development.toothinc.online',
+	'https://www.toothinc.online'
+
 ];
 const corsOptions = {
 	credentials: true,
