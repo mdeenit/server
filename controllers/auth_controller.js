@@ -6,6 +6,7 @@ const register = (req, res) => {
 		new User({
 			username: req.body.username,
 			email: req.body.email,
+			admin: req.body.admin || false,
 		}),
 		req.body.password,
 		(error) => {
@@ -32,6 +33,7 @@ const login = (req, res) => {
 const logout = (req, res) => {
 	req.logout();
 	res.sendStatus(200);
+	console.log('User logged out');
 };
 
 module.exports = { register, login, logout };

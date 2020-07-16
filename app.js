@@ -12,7 +12,23 @@ const authRouter = require('./routes/auth_routes');
 const port = process.env.PORT || 3030;
 const app = express();
 
-app.use(cors());
+const allowList = [
+	'http://localhost:3000',
+	'https://lucid-wright-444fce.netlify.app',
+	'https://development--lucid-wright-444fce.netlify.app',
+	'https://development.toothinc.online',
+	'https://www.toothinc.online'
+
+];
+const corsOptions = {
+	credentials: true,
+	origin: function (origin, callback) {
+		const allowListIndex = allowList.findIndex((url) => url.includes(origin));
+		callback(null, allowListIndex > -1);
+	},
+};
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV !== 'production') {

@@ -35,6 +35,7 @@ const getBooking = (req, res) => {
 const makeBooking = (req, res) => {
 	req.body.modified_date = new Date();
 	req.body.username = req.user.username;
+	console.log('received booking req', req);
 	addBooking(req).save((error, booking) => {
 		if (error) {
 			res.status;
@@ -74,8 +75,10 @@ const removeBooking = (req, res) => {
 
 const userAuthenticated = (req, res, next) => {
 	if (req.isAuthenticated()) {
+		console.log('User authenticated');
 		next();
 	} else {
+		console.log('User not authenticated');
 		res.sendStatus(403);
 	}
 };
