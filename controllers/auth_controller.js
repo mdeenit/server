@@ -6,7 +6,7 @@ const register = (req, res) => {
 		new User({
 			username: req.body.username,
 			email: req.body.email,
-			admin: req.body.admin || false,
+			admin: false,
 		}),
 		req.body.password,
 		(error) => {
