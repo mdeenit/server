@@ -17,8 +17,8 @@ const allowList = [
 	'https://lucid-wright-444fce.netlify.app',
 	'https://development--lucid-wright-444fce.netlify.app',
 	'https://development.toothinc.online',
-	'https://www.toothinc.online'
-
+	'https://www.toothinc.online',
+	'http://localhost:8080',
 ];
 const corsOptions = {
 	credentials: true,
