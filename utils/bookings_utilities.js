@@ -6,14 +6,17 @@ const getAllBookings = (req) => {
 		console.log('this is an admin user');
 		return Booking.find();
 	}
-	if (req.user.admin && req.query.continent) {
-		return Booking.findByContinent(req.query.continent);
-	}
 	if (req.user.username) {
 		return Booking.findByUsername(req.user.username);
 	}
 	return null;
 };
+
+const getContinent = (req) => {
+	if (req.query.continent) {
+		return Booking.findByContinent(req.query.continent);
+	}
+}
 
 const getBookingById = (req) => {
 	return Booking.findById(req.params.id);
@@ -43,4 +46,5 @@ module.exports = {
 	addBooking,
 	deleteBooking,
 	updateBooking,
+	getContinent,
 };

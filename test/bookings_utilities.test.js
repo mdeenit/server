@@ -7,6 +7,7 @@ const {
 	addBooking,
 	deleteBooking,
 	updateBooking,
+	getContinent,
 } = require('../utils/bookings_utilities');
 
 const databaseConnection = 'mongodb://localhost/tooth_inc_test';
@@ -155,8 +156,7 @@ describe('updateBooking', () => {
 });
 
 describe.only('get all bookings for a particular continent', () => {
-    it('should return a booking if it is in the given continent', function ()  {
-        // Add a post for a category 'code'
+    it('should return a booking if it is in the given continent', async () => {
         const date = Date.now();
         const req = {
             body: {
@@ -170,54 +170,56 @@ describe.only('get all bookings for a particular continent', () => {
 				teeth: 2,
                 create_date: date,
                 modified_date: date
-            }
+			}
+			
         };
-        Booking.create(req.body).then(() => {
-            utilities.getAllBookings({
+		await addBooking(req).save()
+		await getContinent({
                 query: {
-                    category: 'continent'
+                    continent: 'Europe'
                 }
             }).exec((err, bookings) => {
                 console.log(`BOOKINGS-----${bookings}---`)
-                // Expect to only get the booking we just added with the 'Europe' continent
                 expect(Object.keys(bookings).length).toBe(1);
-                expect(posts[0].continent).toBe('Europe');
-                done();
+                expect(bookings[0].continent).toBe('Europe');
+            
             });
         });
 
     });
-});
 
 
-describe.only('get all bookings by category with no bookings in category', () => {
-	it('should return no bookings if category not found', function () {
-		
-		const req = {
-			body: {
-				child_name: 'JOHN SMITH',
-				username: 'db_tester_2',
-				address: '999 Fake Street',
-				city: 'London',
-				postcode: 'L1',
-				continent: 'EUROPE',
-				currency: 'GBP',
-				teeth: 2,
-				
-			}
-		};
-		Booking.create(req.body).then(() => {
-			utilities.getAllBookings({
-				query: {
-					continent: 'Asia'
+
+	describe.only('get all bookings for a particular continent', () => {
+		it('should not return a booking if the given continent does not exist', async () => {
+			const date = Date.now();
+			const req = {
+				body: {
+					child_name: 'JOHN SMITH',
+					username: 'db_tester_2',
+					address: '999 Fake Street',
+					city: 'London',
+					postcode: 'L1',
+					continent: 'Europe',
+					currency: 'GBP',
+					teeth: 2,
+					create_date: date,
+					modified_date: date
 				}
-			}).exec((err, bookings) => {
-				expect(Object.keys(bookings).length).toBe(0);
-				done();
+			};
+			await addBooking(req).save()
+			await getContinent({
+					query: {
+						continent: 'Asia'
+					}
+				}).exec((err, bookings) => {
+					console.log(`BOOKINGS-----${bookings}---`)
+					expect(Object.keys(bookings).length).toBe(0);
+				
+				});
 			});
+	
 		});
-	});
-});
 
 function clearData() {
 	return Booking.deleteMany();
