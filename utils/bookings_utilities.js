@@ -6,6 +6,9 @@ const getAllBookings = (req) => {
 		console.log('this is an admin user');
 		return Booking.find();
 	}
+	if (req.user.admin && req.query.continent) {
+		return Booking.findByContinent(req.query.continent);
+	}
 	if (req.user.username) {
 		return Booking.findByUsername(req.user.username);
 	}

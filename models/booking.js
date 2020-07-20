@@ -63,4 +63,10 @@ Booking.statics.findByUsername = function (username) {
 	});
 };
 
+Booking.statics.findByContinent = function (continent) {
+	return this.find({
+		continent: continent,
+	});
+};
+
 module.exports = mongoose.model('Booking', Booking);

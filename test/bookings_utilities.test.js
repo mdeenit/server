@@ -154,6 +154,71 @@ describe('updateBooking', () => {
 	});
 });
 
+describe.only('get all bookings for a particular continent', () => {
+    it('should return a booking if it is in the given continent', function ()  {
+        // Add a post for a category 'code'
+        const date = Date.now();
+        const req = {
+            body: {
+                child_name: 'JOHN SMITH',
+				username: 'db_tester_2',
+				address: '999 Fake Street',
+				city: 'London',
+				postcode: 'L1',
+				continent: 'Europe',
+				currency: 'GBP',
+				teeth: 2,
+                create_date: date,
+                modified_date: date
+            }
+        };
+        Booking.create(req.body).then(() => {
+            utilities.getAllBookings({
+                query: {
+                    category: 'continent'
+                }
+            }).exec((err, bookings) => {
+                console.log(`BOOKINGS-----${bookings}---`)
+                // Expect to only get the booking we just added with the 'Europe' continent
+                expect(Object.keys(bookings).length).toBe(1);
+                expect(posts[0].continent).toBe('Europe');
+                done();
+            });
+        });
+
+    });
+});
+
+
+describe.only('get all bookings by category with no bookings in category', () => {
+	it('should return no bookings if category not found', function () {
+		
+		const req = {
+			body: {
+				child_name: 'JOHN SMITH',
+				username: 'db_tester_2',
+				address: '999 Fake Street',
+				city: 'London',
+				postcode: 'L1',
+				continent: 'EUROPE',
+				currency: 'GBP',
+				teeth: 2,
+				
+			}
+		};
+		Booking.create(req.body).then(() => {
+			utilities.getAllBookings({
+				query: {
+					continent: 'Asia'
+				}
+			}).exec((err, bookings) => {
+				expect(Object.keys(bookings).length).toBe(0);
+				done();
+			});
+		});
+	});
+});
+
 function clearData() {
 	return Booking.deleteMany();
 }
