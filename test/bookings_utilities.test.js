@@ -7,6 +7,7 @@ const {
 	addBooking,
 	deleteBooking,
 	updateBooking,
+	getContinent,
 } = require('../utils/bookings_utilities');
 
 const databaseConnection = 'mongodb://localhost/tooth_inc_test';
@@ -153,6 +154,72 @@ describe('updateBooking', () => {
 		});
 	});
 });
+
+describe.only('get all bookings for a particular continent', () => {
+    it('should return a booking if it is in the given continent', async () => {
+        const date = Date.now();
+        const req = {
+            body: {
+                child_name: 'JOHN SMITH',
+				username: 'db_tester_2',
+				address: '999 Fake Street',
+				city: 'London',
+				postcode: 'L1',
+				continent: 'Europe',
+				currency: 'GBP',
+				teeth: 2,
+                create_date: date,
+                modified_date: date
+			}
+			
+        };
+		await addBooking(req).save()
+		await getContinent({
+                query: {
+                    continent: 'Europe'
+                }
+            }).exec((err, bookings) => {
+                console.log(`BOOKINGS-----${bookings}---`)
+                expect(Object.keys(bookings).length).toBe(1);
+                expect(bookings[0].continent).toBe('Europe');
+            
+            });
+        });
+
+    });
+
+
+
+	describe.only('get all bookings for a particular continent', () => {
+		it('should not return a booking if the given continent does not exist', async () => {
+			const date = Date.now();
+			const req = {
+				body: {
+					child_name: 'JOHN SMITH',
+					username: 'db_tester_2',
+					address: '999 Fake Street',
+					city: 'London',
+					postcode: 'L1',
+					continent: 'Europe',
+					currency: 'GBP',
+					teeth: 2,
+					create_date: date,
+					modified_date: date
+				}
+			};
+			await addBooking(req).save()
+			await getContinent({
+					query: {
+						continent: 'Asia'
+					}
+				}).exec((err, bookings) => {
+					console.log(`BOOKINGS-----${bookings}---`)
+					expect(Object.keys(bookings).length).toBe(0);
+				
+				});
+			});
+	
+		});
 
 function clearData() {
 	return Booking.deleteMany();

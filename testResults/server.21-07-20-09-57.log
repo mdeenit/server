@@ -1,0 +1,40 @@
+21-07-20-09-57
+START----------------------
+
+> server@1.0.0 test /Users/catstevens/Desktop/coderacademy/term4/mern-assignment/server-1
+> mocha "--exit"
+
+
+
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+  get all bookings for a particular continent
+    ✓ should return a booking if it is in the given continent
+BOOKINGS-----{
+  state: '',
+  open_status: true,
+  review_status: false,
+  _id: 5f162f7ccec08f26fe70739b,
+  child_name: 'JOHN SMITH',
+  username: 'db_tester_2',
+  address: '999 Fake Street',
+  city: 'London',
+  postcode: 'L1',
+  continent: 'Europe',
+  currency: 'GBP',
+  teeth: 2,
+  create_date: 2020-07-20T23:57:48.213Z,
+  modified_date: 2020-07-20T23:57:48.213Z,
+  __v: 0
+}---
+
+  get all bookings for a particular continent
+    ✓ should not return a booking if the given continent does not exist
+BOOKINGS--------
+
+
+  2 passing (77ms)
+
+END----------------------
+
+

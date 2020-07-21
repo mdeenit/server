@@ -12,6 +12,12 @@ const getAllBookings = (req) => {
 	return null;
 };
 
+const getContinent = (req) => {
+	if (req.user.admin && req.query.continent) {
+		return Booking.findByContinent(req.query.continent);
+	}
+}
+
 const getBookingById = (req) => {
 	return Booking.findById(req.params.id);
 };
@@ -40,4 +46,5 @@ module.exports = {
 	addBooking,
 	deleteBooking,
 	updateBooking,
+	getContinent,
 };

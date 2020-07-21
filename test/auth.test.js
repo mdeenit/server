@@ -52,7 +52,7 @@ function setupData() {
 	return User.create(testUser);
 }
 
-describe.only('register', () => {
+describe('register', () => {
 	let req = {
 		body: {
 			username: 'JOHN SMITH',
@@ -60,7 +60,7 @@ describe.only('register', () => {
 			password: '123456',
 		},
 	};
-	it('should add and a new user', async () => {
+	it('should add a new user', async () => {
 		await register(req);
 		const user = await User.find();
 		expect(user.length).toBe(1);
