@@ -4,10 +4,27 @@ const {
 	addBooking,
 	deleteBooking,
 	updateBooking,
+	getContinent,
 } = require('../utils/bookings_utilities');
 
 const getBookings = (req, res) => {
 	getAllBookings(req)
+		.sort({
+			modified_date: -1,
+		})
+		.exec((error, bookings) => {
+			if (error) {
+				res.status(500);
+				return res.json({
+					error: error.message,
+				});
+			}
+			res.send(bookings);
+		});
+};
+
+const getBookingsByContinent = (req, res) => {
+	getContinent(req)
 		.sort({
 			modified_date: -1,
 		})
@@ -83,6 +100,8 @@ const userAuthenticated = (req, res, next) => {
 	}
 };
 
+
+
 module.exports = {
 	getBookings,
 	getBooking,
@@ -90,4 +109,5 @@ module.exports = {
 	changeBooking,
 	removeBooking,
 	userAuthenticated,
+	getBookingsByContinent
 };
