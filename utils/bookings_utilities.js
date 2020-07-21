@@ -13,7 +13,7 @@ const getAllBookings = (req) => {
 };
 
 const getContinent = (req) => {
-	if (req.query.continent) {
+	if (req.user.admin && req.query.continent) {
 		return Booking.findByContinent(req.query.continent);
 	}
 }
