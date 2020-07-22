@@ -19,7 +19,7 @@ const Booking = new Schema({
 		type: String,
 		required: true,
 	},
-	state: {
+	country: {
 		type: String,
 		default: '',
 	},
@@ -54,6 +54,13 @@ const Booking = new Schema({
 	review_status: {
 		type: Boolean,
 		default: false,
+	},
+	rating: {
+		type: Number,
+	},
+	comments: {
+		type: String,
+		default: '',
 	},
 });
 
