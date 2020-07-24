@@ -46,7 +46,6 @@ const getContinent = (req, res) => {
 
 const makeContinent = (req, res) => {
 	req.body.modified_date = new Date();
-	req.body.continent = req.user.continent;
 	console.log('received continent req', req);
 	addContinent(req).save((error, continent) => {
 		if (error) {

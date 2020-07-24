@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 // Define the continent schema here
 const Continent = new Schema({
-	
 	continent: {
 		type: String,
 		required: true,
