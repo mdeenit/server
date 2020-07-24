@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 // Define the continent schema here
 const Continent = new Schema({
+	
+	continent: {
+		type: String,
+		required: true,
+	},
 	fairy_name: {
 		type: String,
 		required: true,
 	},
-	continent: {
-		type: String,
-		required: true,
-    },
     description: {
 		type: String,
 		required: true,

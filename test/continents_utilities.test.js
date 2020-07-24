@@ -34,7 +34,7 @@ function connectToMongo(done) {
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
-			useFindAndModify: true,
+			useFindAndModify: false,
 		},
 		(error) => {
 			if (error) {
@@ -47,7 +47,6 @@ function connectToMongo(done) {
 		}
 	);
 }
-
 
 
 function setupData() {
@@ -104,16 +103,7 @@ describe.only('makeContinent', () => {
 		});
 	});
 
-// 	it('should return default value for missing fields', async () => {
-// 		await addContinent(req).save((error, continent) => {
-// 			expect(continent.state).toBe('');
-// 		});
-// 	});
-// 	it('should return open_status as true', async () => {
-// 		await addBooking(req).save((error, booking) => {
-// 			expect(booking.open_status).toBe(true);
-// 		});
-	// });
+
 });
 
 describe.only('deleteContinent', () => {
@@ -149,19 +139,6 @@ describe.only('updateContinent', () => {
 
 describe.only('get Fairy for a particular continent', () => {
     it('should return a fairy if it is in the given continent', async () => {
-        const date = Date.now();
-        const req = {
-            body: {
-			continent: 'Europe',
-			fairy_name: 'Carl',
-			description: 'Loves walks on the beach with his pet Great Dane. His favourite food is lasagne - the way his mum makes it. Plays water polo to keep fit. Fairy of the Year 3 years running...',
-			create_date: date,
-            modified_date: date
-			}
-			
-			
-        };
-		await addContinent(req).save()
 		await getFairy({
                 query: {
                     continent: 'Europe'
@@ -178,19 +155,8 @@ describe.only('get Fairy for a particular continent', () => {
 
 
 
-	describe('get fairy for a particular continent', () => {
+	describe.only('get fairy for a particular continent', () => {
 		it('should not return a fairy if the given continent does not exist', async () => {
-			const date = Date.now();
-			const req = {
-				body: {
-					continent: 'Europe',
-				fairy_name: 'Carl',
-				description: 'Loves walks on the beach with his pet Great Dane. His favourite food is lasagne - the way his mum makes it. Plays water polo to keep fit. Fairy of the Year 3 years running...',
-				create_date: date,
-				modified_date: date
-				}
-			};
-			await addContinent(req).save()
 			await getFairy({
 					query: {
 						continent: 'Asia'

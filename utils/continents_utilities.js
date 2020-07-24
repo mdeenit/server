@@ -5,8 +5,8 @@ const getAllContinents = function(req) {
 }
 
 const getFairy = (req) => {
-	if (req.continent.continent) {
-		return Continent.findFairyByContinent(req.continent.continent);
+	if (req.query.continent) {
+		return Continent.findFairyByContinent(req.query.continent);
 	}
 }
 
