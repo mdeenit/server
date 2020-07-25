@@ -1,0 +1,49 @@
+24-07-20-17-44
+START----------------------
+
+> server@1.0.0 test /Users/catstevens/Desktop/coderacademy/term4/mern-assignment/server-1
+> mocha "--exit"
+
+
+
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+  getAllContinents
+    ✓ should return all continents if they exist in DB
+    ✓ the fairy_name should be Carl
+
+  getContinentById
+    ✓ should return the continent with fairy_name Carl
+
+  makeContinent
+    ✓ should add and return a continent
+
+  deleteContinent
+    ✓ should delete the specified continent
+
+  updateContinent
+    ✓ should update the specified continent and specified fields
+
+  get Fairy for a particular continent
+    ✓ should return a fairy if it is in the given continent
+Continents-----{
+  _id: 5f1a9179bd8115b4a5166cc6,
+  continent: 'Europe',
+  fairy_name: 'Carl',
+  description: 'Loves walks on the beach with his pet Great Dane. His favourite food is lasagne - the way his mum makes it. Plays water polo to keep fit. Fairy of the Year 3 years running...',
+  create_date: 2020-07-24T07:44:57.916Z,
+  modified_date: 2020-07-24T07:44:57.916Z,
+  __v: 0
+}---
+
+  get fairy for a particular continent
+    ✓ should not return a fairy if the given continent does not exist
+Continenst--------
+
+
+  8 passing (222ms)
+
+END----------------------
+
+
