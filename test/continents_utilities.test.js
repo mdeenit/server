@@ -60,7 +60,7 @@ function setupData() {
 	return Continent.create(testContinent);
 }
 
-describe.only('getAllContinents', () => {
+describe('getAllContinents', () => {
 	let req = {
 		query: {},
 	};
@@ -76,7 +76,7 @@ describe.only('getAllContinents', () => {
 	});
 });
 
-describe.only('getContinentById', () => {
+describe('getContinentById', () => {
 	it('should return the continent with fairy_name Carl', async () => {
 		let req = {
 			params: {
@@ -89,7 +89,7 @@ describe.only('getContinentById', () => {
 	});
 });
 
-describe.only('makeContinent', () => {
+describe('makeContinent', () => {
 	let req = {
 		body: {
 			continent: 'Europe',
@@ -106,7 +106,7 @@ describe.only('makeContinent', () => {
 
 });
 
-describe.only('deleteContinent', () => {
+describe('deleteContinent', () => {
 	it('should delete the specified continent', async () => {
 		let req = {
 			params: {
@@ -120,7 +120,7 @@ describe.only('deleteContinent', () => {
 	});
 });
 
-describe.only('updateContinent', () => {
+describe('updateContinent', () => {
 	it('should update the specified continent and specified fields', async () => {
 		let req = {
 			params: {
@@ -137,7 +137,7 @@ describe.only('updateContinent', () => {
 	});
 });
 
-describe.only('get Fairy for a particular continent', () => {
+describe('get Fairy for a particular continent', () => {
     it('should return a fairy if it is in the given continent', async () => {
 		await getFairy({
                 query: {
@@ -155,7 +155,7 @@ describe.only('get Fairy for a particular continent', () => {
 
 
 
-	describe.only('get fairy for a particular continent', () => {
+	describe('get fairy for a particular continent', () => {
 		it('should not return a fairy if the given continent does not exist', async () => {
 			await getFairy({
 					query: {
