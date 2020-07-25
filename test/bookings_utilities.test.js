@@ -155,7 +155,7 @@ describe('updateBooking', () => {
 	});
 });
 
-describe.only('get all bookings for a particular continent', () => {
+describe('get all bookings for a particular continent', () => {
     it('should return a booking if it is in the given continent', async () => {
         const date = Date.now();
         const req = {
@@ -190,7 +190,7 @@ describe.only('get all bookings for a particular continent', () => {
 
 
 
-	describe.only('get all bookings for a particular continent', () => {
+	describe('get all bookings for a particular continent', () => {
 		it('should not return a booking if the given continent does not exist', async () => {
 			const date = Date.now();
 			const req = {
