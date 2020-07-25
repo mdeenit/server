@@ -100,5 +100,5 @@ module.exports = {
 	changeContinent,
 	removeContinent,
 	userAuthenticated,
-	getFairyByContinent
+	getFairyByContinent,
 };
