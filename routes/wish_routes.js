@@ -6,8 +6,8 @@ const {
 	getWish,
 	makeWish,
 	removeWish,
-	userAuthenticated,
-} = require('../controllers/_controller');
+	userAuthenticated
+} = require('../controllers/wish_controller');
 
 // Authenticate user for all routes
 router.use(userAuthenticated);

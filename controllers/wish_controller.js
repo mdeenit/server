@@ -7,8 +7,10 @@ const {
 
 const getWishes = (req, res) => {
 	getAllWishes(req)
-		
-		.exec((error, wish) => {
+	.sort({
+		modified_date: -1,
+	})
+		.exec((error, wishes) => {
 			if (error) {
 				res.status(500);
 				return res.json({
@@ -70,5 +72,5 @@ module.exports = {
 	getWish,
 	makeWish,
 	removeWish,
-	userAuthenticated,
+	userAuthenticated
 };

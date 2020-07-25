@@ -9,7 +9,8 @@ const passport = require('passport');
 const bookingRouter = require('./routes/bookings_routes');
 const continentRouter = require('./routes/continents_routes');
 const authRouter = require('./routes/auth_routes');
-const wishRouter = require('routes/wish_routes');
+const wishRouter = require('./routes/wish_routes');
+
 
 const port = process.env.PORT || 3030;
 const app = express();
