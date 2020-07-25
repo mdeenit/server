@@ -28,7 +28,7 @@ router.post('/', makeBooking);
 // Delete booking
 router.delete('/:id', removeBooking);
 
-// Delete booking
+// Update booking
 router.patch('/:id', changeBooking);
 
 module.exports = router;
