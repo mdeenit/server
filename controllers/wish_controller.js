@@ -1,15 +1,16 @@
-const { 
-    getAllWishes,
+const {
+	getAllWishes,
 	getWishById,
 	addWish,
+	updateWish,
 	deleteWish,
-} = require("../utils/wish_utilities");
+} = require('../utils/wish_utilities');
 
 const getWishes = (req, res) => {
 	getAllWishes(req)
-	.sort({
-		modified_date: -1,
-	})
+		.sort({
+			modified_date: -1,
+		})
 		.exec((error, wishes) => {
 			if (error) {
 				res.status(500);
@@ -33,6 +34,7 @@ const getWish = (req, res) => {
 
 const makeWish = (req, res) => {
 	req.body.modified_date = new Date();
+	req.body.username = req.user.username;
 	console.log('received wish req', req);
 	addWish(req).save((error, wish) => {
 		if (error) {
@@ -58,19 +60,23 @@ const removeWish = (req, res) => {
 	});
 };
 
-const userAuthenticated = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		console.log('User authenticated');
-		next();
-	} else {
-		console.log('User not authenticated');
-		res.sendStatus(403);
-	}
+const changeWish = (req, res) => {
+	updateWish(req).exec((error, wish) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.status(200);
+		res.send(wish);
+	});
 };
+
 module.exports = {
 	getWishes,
 	getWish,
 	makeWish,
 	removeWish,
-	userAuthenticated
+	changeWish,
 };
