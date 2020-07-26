@@ -2,7 +2,7 @@ const Wish = require('../models/wish');
 
 const getAllWishes = function (req) {
 	if (req.user.admin) {
-		return Wish.find();
+		return Wish.find({ open_status: true });
 	}
 };
 
@@ -14,6 +14,7 @@ const getWishById = (req) => {
 
 const updateWish = (req) => {
 	if (req.user.admin) {
+		req.body.open_status = false;
 		req.body.modified_date = Date.now();
 		return Wish.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
