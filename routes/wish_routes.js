@@ -6,8 +6,9 @@ const {
 	getWish,
 	makeWish,
 	removeWish,
-	userAuthenticated
+	changeWish,
 } = require('../controllers/wish_controller');
+const { userAuthenticated } = require('../utils/auth_utilities');
 
 // Authenticate user for all routes
 router.use(userAuthenticated);
@@ -20,6 +21,9 @@ router.get('/:id', getWish);
 
 // Make a wish
 router.post('/', makeWish);
+
+// Update status of a wish
+router.patch('/:id', changeWish);
 
 // Delete wish
 router.delete('/:id', removeWish);

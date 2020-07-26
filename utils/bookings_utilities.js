@@ -3,7 +3,6 @@ const Booking = require('../models/booking');
 const getAllBookings = (req) => {
 	console.log('user: ', req.user.username);
 	if (req.user.admin) {
-		console.log('this is an admin user');
 		return Booking.find();
 	}
 	if (req.user.username) {
@@ -16,7 +15,7 @@ const getContinent = (req) => {
 	if (req.user.admin && req.query.continent) {
 		return Booking.findByContinent(req.query.continent);
 	}
-}
+};
 
 const getBookingById = (req) => {
 	return Booking.findById(req.params.id);

@@ -7,9 +7,17 @@ const Wish = new Schema({
 		type: String,
 		required: true,
 	},
-	user_name: {
+	username: {
 		type: String,
 		required: true,
+	},
+	granted: {
+		type: Boolean,
+		default: false,
+	},
+	open_status: {
+		type: Boolean,
+		default: true,
 	},
 	create_date: {
 		type: Date,
