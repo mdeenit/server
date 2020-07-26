@@ -1,11 +1,25 @@
 const Wish = require('../models/wish');
 
-const getAllWishes = function(req) {
-	return Wish.find();
-}
+const getAllWishes = function (req) {
+	if (req.user.admin) {
+		return Wish.find({ open_status: true });
+	}
+};
 
 const getWishById = (req) => {
-    return Wish.findById(req.params.id);
+	if (req.user.admin) {
+		return Wish.findById(req.params.id);
+	}
+};
+
+const updateWish = (req) => {
+	if (req.user.admin) {
+		req.body.open_status = false;
+		req.body.modified_date = Date.now();
+		return Wish.findByIdAndUpdate(req.params.id, req.body, {
+			new: true,
+		});
+	}
 };
 
 const addWish = (req) => {
@@ -24,4 +38,5 @@ module.exports = {
 	getWishById,
 	addWish,
 	deleteWish,
+	updateWish,
 };

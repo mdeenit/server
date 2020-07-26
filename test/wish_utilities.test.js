@@ -45,12 +45,11 @@ function connectToMongo(done) {
 	);
 }
 
-
 function setupData() {
 	let date = Date.now();
 	let testWish = {};
 	testWish.wish = 'I wish for world peace';
-	testWish.user_name = 'Isabel';
+	testWish.username = 'Isabel';
 	testWish.create_date = date;
 	testWish.modified_date = date;
 	return Wish.create(testWish);
@@ -59,6 +58,9 @@ function setupData() {
 describe.only('getAllWishes', () => {
 	let req = {
 		query: {},
+		user: {
+			admin: true,
+		},
 	};
 	it('should return all wishes if they exist in DB', async () => {
 		await getAllWishes(req).exec((error, wishes) => {
@@ -67,20 +69,23 @@ describe.only('getAllWishes', () => {
 	});
 	it('the username should be Isabel', async () => {
 		await getAllWishes(req).exec((error, wishes) => {
-			expect(wishes[0].user_name).toBe('Isabel');
+			expect(wishes[0].username).toBe('Isabel');
 		});
 	});
 });
 
 describe.only('getWishById', () => {
-	it('should return the wish with user_name Isabel', async () => {
+	it('should return the wish with username Isabel', async () => {
 		let req = {
 			params: {
 				id: wishId,
 			},
+			user: {
+				admin: true,
+			},
 		};
 		await getWishById(req).exec((error, wish) => {
-			expect(wish.user_name).toBe('Isabel');
+			expect(wish.username).toBe('Isabel');
 		});
 	});
 });
@@ -89,16 +94,14 @@ describe.only('makeWish', () => {
 	let req = {
 		body: {
 			wish: 'I wish for world peace.',
-			user_name: 'Isabel',
+			username: 'Isabel',
 		},
 	};
 	it('should add and return a wish', async () => {
 		await addWish(req).save((error, wish) => {
-			expect(wish.user_name).toBe('Isabel');
+			expect(wish.username).toBe('Isabel');
 		});
 	});
-
-
 });
 
 describe.only('deleteWish', () => {
@@ -106,6 +109,9 @@ describe.only('deleteWish', () => {
 		let req = {
 			params: {
 				id: wishId,
+			},
+			user: {
+				admin: true,
 			},
 		};
 		await deleteWish(req).exec();
@@ -115,6 +121,6 @@ describe.only('deleteWish', () => {
 	});
 });
 
-	function clearData() {
-		return Wish.deleteMany();
-	}
+function clearData() {
+	return Wish.deleteMany();
+}

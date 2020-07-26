@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-
+const { userAuthenticated } = require('../utils/auth_utilities');
 const {
 	getBookings,
 	getBooking,
 	makeBooking,
 	changeBooking,
 	removeBooking,
-	userAuthenticated,
-	getBookingsByContinent
+	getBookingsByContinent,
 } = require('../controllers/bookings_controller');
 
 // Authenticate user for all routes

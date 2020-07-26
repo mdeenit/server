@@ -57,6 +57,7 @@ const Booking = new Schema({
 	},
 	rating: {
 		type: Number,
+		default: 0,
 	},
 	comments: {
 		type: String,

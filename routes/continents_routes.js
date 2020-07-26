@@ -7,16 +7,16 @@ const {
 	makeContinent,
 	changeContinent,
 	removeContinent,
-	userAuthenticated,
-	getFairyByContinent
+	getFairyByContinent,
 } = require('../controllers/continents_controller');
+const { userAuthenticated } = require('../utils/auth_utilities');
 
 // Authenticate user for all routes
 router.use(userAuthenticated);
 // Read all continents
 router.get('/', getContinents);
 
-//get Faiey by continent
+//get Fairy by continent
 router.get('/continent', getFairyByContinent);
 
 // Read continent with :id

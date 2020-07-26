@@ -1,0 +1,31 @@
+26-07-20-10-33
+START----------------------
+
+> server@1.0.0 test /Users/louiseflanagan/Documents/coder-academy/TheToothBusiness/MERN-server
+> mocha "--exit"
+
+
+
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+Connected to Tooth Inc. TEST database
+  getAllWishes
+    ✓ should return all wishes if they exist in DB
+    ✓ the username should be Isabel
+
+  getWishById
+    ✓ should return the wish with username Isabel
+
+  makeWish
+    ✓ should add and return a wish
+
+  deleteWish
+    ✓ should delete the specified wish
+
+
+  5 passing (153ms)
+
+END----------------------
+
+
