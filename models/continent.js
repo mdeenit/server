@@ -11,7 +11,7 @@ const Continent = new Schema({
 		type: String,
 		required: true,
 	},
-    description: {
+	description: {
 		type: String,
 		required: true,
 	},
@@ -24,7 +24,6 @@ const Continent = new Schema({
 		required: true,
 	},
 });
-
 
 Continent.statics.findFairyByContinent = function (continent) {
 	return this.find({

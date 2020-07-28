@@ -1,37 +1,34 @@
-const { 
-    getAllContinents,
+const {
+	getAllContinents,
 	getContinentById,
 	addContinent,
 	deleteContinent,
 	updateContinent,
 	getFairy,
-} = require("../utils/continents_utilities");
+} = require('../utils/continents_utilities');
 
 const getContinents = (req, res) => {
-	getAllContinents(req)
-		
-		.exec((error, continents) => {
-			if (error) {
-				res.status(500);
-				return res.json({
-					error: error.message,
-				});
-			}
-			res.send(continents);
-		});
+	getAllContinents(req).exec((error, continents) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.send(continents);
+	});
 };
 
 const getFairyByContinent = (req, res) => {
-	getFairy(req)
-		.exec((error, fairy_name) => {
-			if (error) {
-				res.status(500);
-				return res.json({
-					error: error.message,
-				});
-			}
-			res.send(fairy_name);
-		});
+	getFairy(req).exec((error, fairy_name) => {
+		if (error) {
+			res.status(500);
+			return res.json({
+				error: error.message,
+			});
+		}
+		res.send(fairy_name);
+	});
 };
 
 const getContinent = (req, res) => {
@@ -84,21 +81,11 @@ const removeContinent = (req, res) => {
 	});
 };
 
-const userAuthenticated = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		console.log('User authenticated');
-		next();
-	} else {
-		console.log('User not authenticated');
-		res.sendStatus(403);
-	}
-};
 module.exports = {
 	getContinents,
 	getContinent,
 	makeContinent,
 	changeContinent,
 	removeContinent,
-	userAuthenticated,
-	getFairyByContinent
+	getFairyByContinent,
 };
