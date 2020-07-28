@@ -25,6 +25,7 @@ const updateWish = (req) => {
 const addWish = (req) => {
 	let date = Date.now();
 	req.body.create_date = date;
+	req.body.username = req.user.username;
 	req.body.modified_date = date;
 	return new Wish(req.body);
 };
