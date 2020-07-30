@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -22,6 +23,9 @@ const allowList = [
 	'https://www.toothinc.online',
 	'http://localhost:8080',
 ];
+
+app.use(cookieParser());
+
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
