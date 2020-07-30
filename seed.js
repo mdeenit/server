@@ -100,8 +100,8 @@ const data = [
 			},
 			{
 				continent: 'Oceania',
-				fairy_name: 'Summer',
-				description: 'Surfs in summer and snowboards in winter.',
+				fairy_name: 'Jemima',
+				description: 'Surfs in summer and snowboards in winter. Drives a Kombi with a mattress in the back so she can go where the wind blows her. Believes in conspiracy theories and makes her own kombucha.',
 				create_date: date,
 				modified_date: date,
 			},
