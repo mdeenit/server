@@ -63,9 +63,9 @@ const data = [
 			},
 			{
 				continent: 'Asia',
-				fairy_name: 'Norman',
+				fairy_name: 'Maude',
 				description:
-					'Won a Gold medal for pole vaulting at the make believe olympics in 1998.',
+					'Longest standing Tooth Inc employee with 567 years of service. Just like your Nanna - if your Nanna drives a dirt-bike. Hobbies include aerial photography while sky-diving and spear-fishing. Once beat the Yeti in arm-wrestling and refuses a rematch. He is certain she cheated, but can\'t figure out how.',
 				create_date: date,
 				modified_date: date,
 			},
@@ -73,14 +73,14 @@ const data = [
 				continent: 'Africa',
 				fairy_name: 'Sue',
 				description:
-					'Collects human knick knacks. Recently caught stealing a tea spoon from a clients kitchen.',
+					'Comes across as aloof and entitled but get to know her and she is the life and sould of every party.',
 				create_date: date,
 				modified_date: date,
 			},
 			{
 				continent: 'Antarctica',
-				fairy_name: 'Sharon',
-				description: 'Love cats, cats and more cats.',
+				fairy_name: 'Nigel',
+				description: 'Transferred to Antarctica from the busier European route and still hasn\'t adapted to the cold. When he isn\'t doing pick-ups he can be found eating Cheetos on the couch. The only time he does a pick-up is when the occasional passing cruise ship has a kid aboard - and that kid happens to lose a tooth. A bit of a slob.',
 				create_date: date,
 				modified_date: date,
 			},
@@ -93,17 +93,15 @@ const data = [
 			},
 			{
 				continent: 'South America',
-				fairy_name: 'Shane',
-				description:
-					'Lost fairy of the year 16 times against his brother Phil.',
+				fairy_name: 'Mateo',
+				description: 'Matteo is a bit of a mummy\'s boy. He likes his steak cooked rare - so he never gets an invite when the other fairies have an assado. Possibly the sweetest fairy you will ever meet.',
 				create_date: date,
 				modified_date: date,
 			},
 			{
 				continent: 'Oceania',
 				fairy_name: 'Maude',
-				description:
-					'Longest standing Tooth Inc employee with 567 years of service.',
+				description: '',
 				create_date: date,
 				modified_date: date,
 			},
