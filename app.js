@@ -23,7 +23,7 @@ const allowList = [
 	'https://www.toothinc.online',
 	'http://localhost:8080',
 ];
-
+app.set('trust proxy', 1);
 app.use(cookieParser());
 
 const corsOptions = {
@@ -66,8 +66,12 @@ app.use(
 		secret: 'The Tooth Inc secret string',
 		resave: false,
 		saveUninitialized: false,
+		proxy: true,
 		cookie: {
 			maxAge: 1800000,
+			sameSite: 'none',
+			secure: true,
+			httpOnly: false,
 		},
 		store: new MongoStore({
 			mongooseConnection: mongoose.connection,
