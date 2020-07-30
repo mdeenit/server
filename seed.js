@@ -65,7 +65,7 @@ const data = [
 				continent: 'Asia',
 				fairy_name: 'Maude',
 				description:
-					'Longest standing Tooth Inc employee with 567 years of service. Just like your Nanna - if your Nanna drives a dirt-bike. Hobbies include aerial photography while sky-diving, and spear-fishing. Once beat the Yeti in arm-wrestling and refuses a rematch. He is certain she cheated, but can\'t figure out how.',
+					'Longest standing Tooth Inc employee with 567 years of service. Just like your Nanna - if your Nanna drives a dirt-bike. Hobbies include spear-fishing and aerial photography while sky-diving. Once beat the Yeti in arm-wrestling and refuses a rematch. He is certain she cheated, but can\'t figure out how.',
 				create_date: date,
 				modified_date: date,
 			},
@@ -73,14 +73,14 @@ const data = [
 				continent: 'Africa',
 				fairy_name: 'Patience',
 				description:
-					'Comes across as aloof and entitled but once you are in her circle of trust she would kill for you and not ask any questions. Rumoured to have been a mercenary during the crusades. Frankly, she scares the bejusus out of me.',
+					'Comes across as aloof and entitled but once you are in her circle of trust she would kill for you and not ask any questions. Rumoured to have been a mercenary during the crusades. Frankly, she scares the bejesus out of me.',
 				create_date: date,
 				modified_date: date,
 			},
 			{
 				continent: 'Antarctica',
 				fairy_name: 'Nigel',
-				description: 'Transferred to Antarctica from the busier European route and still hasn\'t adapted to the cold. When he isn\'t doing pick-ups he can be found eating Cheetos and playing Nintendo on the couch. The only time he does a pick-up is when the occasional passing cruise ship has a kid onboard - and that kid happens to lose a tooth. A bit of a slob.',
+				description: 'Transferred to Antarctica from the busier North American route and still hasn\'t adapted to the cold. When he isn\'t doing pick-ups he can be found eating Cheetos and playing Nintendo on the couch. The only time he does a pick-up is when the occasional passing cruise ship has a kid onboard - and that kid happens to lose a tooth. A bit of a slob.',
 				create_date: date,
 				modified_date: date,
 			},
